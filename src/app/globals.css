@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0b0b0b;
+  --color-ivory: #f6f1e8;
+  --color-sand: #cbb89a;
+  --color-gold: #8f6b42;
+  --color-panel: rgba(255, 255, 255, 0.06);
+  --color-line: rgba(255, 255, 255, 0.12);
+  --font-sans:
+    "Avenir Next", "Segoe UI", "Helvetica Neue", "Helvetica", sans-serif;
+  --font-display:
+    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Times New Roman",
+    serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(201, 160, 104, 0.18), transparent 34%),
+    linear-gradient(180deg, #17120f 0%, #0b0b0b 40%, #050505 100%);
+  color: var(--color-ivory);
+  font-family: var(--font-sans), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+}
+
+.hero-shell {
+  position: relative;
+  overflow: clip;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(130deg, rgba(255, 255, 255, 0.02), transparent 28%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 20%),
+    radial-gradient(circle at 78% 22%, rgba(192, 147, 89, 0.24), transparent 18%);
+  pointer-events: none;
+}
+
+.hero-panel,
+.feature-card,
+.showcase-panel,
+.metric-card {
+  position: relative;
+  border: 1px solid var(--color-line);
+  background: var(--color-panel);
+  backdrop-filter: blur(22px);
+}
+
+.hero-panel {
+  min-height: 34rem;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.headshot-media {
+  position: relative;
+  min-height: 32rem;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1.75rem;
+}
+
+.hero-panel-glow {
+  position: absolute;
+  inset: auto auto 12% -10%;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(203, 184, 154, 0.34), transparent 68%);
+  filter: blur(20px);
+}
+
+.metric-card {
+  border-radius: 1.5rem;
+  padding: 1.25rem;
+}
+
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.section-label {
+  color: var(--color-sand);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  border-radius: 9999px;
+  padding: 0 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #f4e5c8 0%, #c89a63 100%);
+  color: #18120d;
+}
+
+.button-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+}
+
+.button-primary:hover,
+.button-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.feature-card {
+  border-radius: 2rem;
+  padding: 2rem;
+  min-height: 20rem;
+}
+
+.footer-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+}
+
+.showcase-panel {
+  display: grid;
+  gap: 2rem;
+  overflow: clip;
+  border-radius: 2.5rem;
+  padding: 2rem;
+}
+
+.showcase-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.showcase-orbit {
+  position: relative;
+  min-height: 22rem;
+  display: grid;
+  place-items: center;
+}
+
+.orbit-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.orbit-ring-large {
+  width: min(26rem, 92vw);
+  height: min(26rem, 92vw);
+}
+
+.orbit-ring-small {
+  width: min(18rem, 66vw);
+  height: min(18rem, 66vw);
+}
+
+.orbit-core {
+  display: grid;
+  place-items: center;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 36%),
+    linear-gradient(180deg, rgba(200, 154, 99, 0.28), rgba(255, 255, 255, 0.05));
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+
+@media (min-width: 960px) {
+  .showcase-panel {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-panel {
+    min-height: auto;
+  }
+}
