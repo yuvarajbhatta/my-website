@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Yuva Raj Bhatta | Software Developer",
+  title: "Yuva Raj Bhatta",
   description:
     "Personal website of Yuva Raj Bhatta, a full-stack software developer based in Fort Worth, Texas with experience in software engineering, data science, and modern backend systems.",
 };
