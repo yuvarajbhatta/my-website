@@ -1,0 +1,14 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Deploy my website
+        run: /home/yuva/deploy-my-website.sh
