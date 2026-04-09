@@ -80,8 +80,9 @@ h3 {
 
 .headshot-media {
   position: relative;
+  aspect-ratio: 4 / 5;
   min-height: 32rem;
-  height: 100%;
+  height: auto;
   overflow: hidden;
   border-radius: 1.75rem;
 }
@@ -233,5 +234,9 @@ h3 {
 @media (max-width: 767px) {
   .hero-panel {
     min-height: auto;
+  }
+
+  .headshot-media {
+    min-height: 26rem;
   }
 }

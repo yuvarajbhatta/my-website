@@ -172,14 +172,14 @@ export default function Home() {
           </nav>
         </header>
 
-        <div className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-7xl items-end gap-12 px-6 pb-10 pt-8 md:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:pb-16">
+        <div className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-7xl items-center gap-12 px-6 pb-10 pt-8 md:px-10 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-16 lg:pb-16">
           <div className="space-y-8">
             <p className="max-w-xl text-sm uppercase tracking-[0.28em] text-[var(--color-sand)]">
               Software developer, full-stack engineer, and technology-driven
               creative based in Fort Worth, Texas
             </p>
             <div className="space-y-6">
-              <h1 className="max-w-4xl text-5xl leading-[0.96] tracking-[-0.05em] md:text-7xl lg:text-[6.5rem]">
+              <h1 className="max-w-4xl text-4xl leading-[0.98] tracking-[-0.04em] md:text-6xl lg:text-[5rem]">
                 Engineer by profession, creator by passion.
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
@@ -209,7 +209,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-panel">
+          <div className="hero-panel w-full max-w-[28rem] justify-self-center lg:justify-self-end lg:-translate-y-4">
             <div className="hero-panel-glow" />
             <div className="headshot-media">
               <Image
@@ -238,9 +238,9 @@ export default function Home() {
             </div>
           </div>
           <div className="metric-card">
-            <div className="text-4xl tracking-[-0.08em] text-white">2</div>
+            <div className="text-4xl tracking-[-0.08em] text-white">4</div>
             <div className="text-sm text-white/60">
-              Languages spoken: English and Nepali
+              Languages spoken: Nepali, English, Hindi, Urdu
             </div>
           </div>
         </div>
