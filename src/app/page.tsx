@@ -1,30 +1,115 @@
 import Image from "next/image";
 
-const focusAreas = [
+const navItems = [
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Focus", href: "#technical-focus" },
+  { label: "GitHub", href: "#github" },
+  { label: "Contact", href: "#contact" },
+];
+
+const metrics = [
+  { value: "2022", label: "Building production software at Paychex" },
+  { value: "MS", label: "Data Science foundation" },
+  { value: "Full Stack", label: "Backend, cloud, integrations, UI" },
+];
+
+const projectCards = [
   {
-    eyebrow: "Full-Stack Delivery",
-    title: "Building across application layers, not just one part of the stack.",
+    eyebrow: "Infrastructure",
+    title: "Self-hosted cloud infrastructure",
     copy:
-      "I work across backend systems, data flows, and delivery pipelines with experience spanning Java services, Oracle-backed systems, containerized workflows, and event-driven tooling.",
+      "A personal lab for cloud services, Linux systems, networking, deployment workflows, secure access, and long-running services.",
+    tags: ["Linux", "Docker", "Cloudflare", "Self Hosting"],
   },
   {
-    eyebrow: "Professional Foundation",
-    title: "Grounded in both software engineering and data science.",
+    eyebrow: "Product System",
+    title: "Family tree and lineage platform",
     copy:
-      "My academic background combines a bachelor's degree in computer science with a master's degree in data science, giving me both engineering discipline and analytical depth.",
+      "A structured platform concept for preserving family history, relationships, cultural context, and lineage data with durable digital records.",
+    tags: ["Full Stack", "Data Modeling", "UX"],
   },
   {
-    eyebrow: "Creative Edge",
-    title: "Technical by profession, artistic by instinct.",
+    eyebrow: "Automation",
+    title: "AI automation experiments",
     copy:
-      "Alongside software development, I stay closely connected to music and performance through singing, instruments, and dance.",
+      "Explorations around AI-assisted workflows, developer productivity, task automation, and useful agents for repetitive technical work.",
+    tags: ["AI", "Python", "Developer Tooling"],
+  },
+  {
+    eyebrow: "Analytics",
+    title: "Data science and analytics work",
+    copy:
+      "Applied data analysis, modeling, and reporting work shaped by a graduate data science background and practical engineering delivery.",
+    tags: ["Data Science", "SQL", "Python"],
+  },
+  {
+    eyebrow: "Identity",
+    title: "Personal website and digital identity system",
+    copy:
+      "A modern developer portfolio designed to connect professional credibility, technical focus, creative identity, and public presence.",
+    tags: ["Next.js", "TypeScript", "Design Systems"],
   },
 ];
 
+const focusCards = [
+  {
+    title: "Backend Systems",
+    copy:
+      "Production-oriented services, APIs, database-backed workflows, integration boundaries, and maintainable business logic.",
+  },
+  {
+    title: "AI & Automation",
+    copy:
+      "Practical automation experiments that combine AI tools, scripts, workflows, and developer productivity patterns.",
+  },
+  {
+    title: "Cloud & DevOps",
+    copy:
+      "Cloud infrastructure, self-hosted environments, deployment pipelines, containers, DNS, and operational discipline.",
+  },
+  {
+    title: "Data Science",
+    copy:
+      "Analytical thinking, structured data work, modeling foundations, and the ability to connect engineering decisions to data.",
+  },
+  {
+    title: "Full Stack Development",
+    copy:
+      "End-to-end feature delivery across backend, frontend, databases, APIs, and the user-facing parts of a system.",
+  },
+  {
+    title: "Infrastructure Security",
+    copy:
+      "Secure access, network-aware architecture, responsible configuration, and pragmatic protection for systems that stay online.",
+  },
+];
+
+const techStack = [
+  "Java",
+  "Spring Boot",
+  "Python",
+  "SQL",
+  "PostgreSQL",
+  "MySQL",
+  "Oracle",
+  "Docker",
+  "Linux",
+  "Git",
+  "GitHub",
+  "Cloudflare",
+  "REST APIs",
+  "Kafka",
+  "CI/CD",
+  "React",
+  "Next.js",
+  "TypeScript",
+];
+
 const experiencePoints = [
-  "Software Developer at Paychex since 2022, contributing as a full-stack engineer in a production environment.",
-  "Works with technologies across backend development, databases, integration workflows, and delivery automation.",
-  "Experience includes Java, Oracle, CI/CD pipelines, Docker, and Kafka within practical software delivery contexts.",
+  "Contributes to production software delivery as a Software Developer at Paychex.",
+  "Works across backend systems, database workflows, integrations, and automation.",
+  "Brings a full-stack mindset to engineering problems that require reliability, clarity, and practical execution.",
 ];
 
 const education = [
@@ -40,18 +125,19 @@ const education = [
   },
 ];
 
-const skills = [
-  "Java",
-  "Oracle",
-  "SQL",
-  "REST APIs",
-  "Docker",
-  "Kafka",
-  "Git",
-  "CI/CD",
-  "Full-Stack Development",
-  "Data Science",
-  "System Integration",
+const githubCards = [
+  {
+    title: "Profile Summary",
+    src: "https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=yuvarajbhatta&theme=github_dark",
+  },
+  {
+    title: "Language Profile",
+    src: "https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=yuvarajbhatta&theme=github_dark",
+  },
+  {
+    title: "Commit Activity",
+    src: "https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=yuvarajbhatta&theme=github_dark&utcOffset=-5",
+  },
 ];
 
 const socialLinks = [
@@ -88,7 +174,7 @@ const socialLinks = [
 ];
 
 function SocialIcon({ label }: { label: string }) {
-  const className = "h-5 w-5 text-[var(--color-ivory)]";
+  const className = "h-5 w-5 text-cyan-100";
 
   switch (label) {
     case "LinkedIn":
@@ -150,255 +236,275 @@ function SocialIcon({ label }: { label: string }) {
   }
 }
 
+function SectionHeader({
+  eyebrow,
+  title,
+  copy,
+}: {
+  eyebrow: string;
+  title: string;
+  copy?: string;
+}) {
+  return (
+    <div className="section-heading">
+      <p className="section-kicker">{eyebrow}</p>
+      <h2 className="section-title">{title}</h2>
+      {copy ? <p>{copy}</p> : null}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
-    <main className="bg-[var(--color-ink)] text-[var(--color-ivory)]">
-      <section className="hero-shell">
-        <div className="hero-noise" />
-        <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 md:px-10">
-          <div className="text-base font-medium uppercase tracking-[0.32em] text-[var(--color-sand)] md:text-lg">
-            Yuva Raj Bhatta
-          </div>
-          <nav className="hidden gap-8 text-sm text-white/72 md:flex">
-            <a href="#about" className="transition hover:text-white">
-              About
-            </a>
-            <a href="#experience" className="transition hover:text-white">
-              Experience
-            </a>
-            <a href="#contact" className="transition hover:text-white">
-              Contact
-            </a>
-          </nav>
-        </header>
+    <main className="site-shell text-slate-100">
+      <div className="ambient-grid" />
+      <div className="ambient-glow ambient-glow-one" />
+      <div className="ambient-glow ambient-glow-two" />
 
-        <div className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-7xl items-center gap-12 px-6 pb-10 pt-8 md:px-10 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-16 lg:pb-16">
-          <div className="space-y-8">
-            <p className="max-w-xl text-sm uppercase tracking-[0.28em] text-[var(--color-sand)]">
-              Software developer, full-stack engineer, and technology-driven
-              creative based in Fort Worth, Texas
-            </p>
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050814]/75 backdrop-blur-xl">
+        <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 md:px-8">
+          <a href="#home" className="brand-mark" aria-label="Yuva Bhatta home">
+            <span>YB</span>
+            <div>
+              <strong>Yuva Bhatta</strong>
+              <small>Developer Portfolio</small>
+            </div>
+          </a>
+
+          <div className="hidden items-center gap-6 text-slate-300 md:flex">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href} className="nav-link">
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </header>
+
+      <section id="home" className="hero-section">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-14 md:px-8 md:py-20 lg:grid-cols-[minmax(0,1fr)_23.5rem] lg:gap-14">
+          <div className="space-y-7">
+            <div className="status-pill">
+              <span className="status-dot" />
+              Software Developer • AI Automation • Cloud Infrastructure
+            </div>
+
             <div className="space-y-6">
-              <h1 className="max-w-4xl text-4xl leading-[0.98] tracking-[-0.04em] md:text-6xl lg:text-[5rem]">
-                Engineer by profession, creator by passion.
+              <p className="terminal-line">
+                <span>yuva@portfolio</span>:~$ ship reliable systems
+              </p>
+              <h1 className="hero-title hero-heading">
+                Building reliable backend, automation, cloud, and data systems.
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
-                I am a full-stack software developer currently working at
-                Paychex. With academic foundations in computer science and data
-                science, I bring a practical engineering mindset to modern
-                software systems while staying strongly connected to music,
-                performance, and creative expression.
+              <p className="hero-copy">
+                I am Yuva Bhatta, a Texas-based software developer originally
+                from Nepal. I build across backend systems, integrations, cloud
+                infrastructure, data workflows, and developer tooling with a
+                practical full-stack mindset.
               </p>
             </div>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href="/Yuva_Raj_Bhatta_Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="button-primary"
-              >
-                View resume
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a href="https://cloud.yrbhatta.com/s/4QqPcSm4Kbc4xf3" target="_blank" rel="noreferrer" className="button-primary">
+                View Documents
               </a>
-              <a href="#about" className="button-secondary">
-                About me
+              <a href="https://github.com/yuvarajbhatta" target="_blank" rel="noreferrer" className="button-secondary">
+                GitHub
               </a>
               <a href="#contact" className="button-secondary">
-                Connect
+                Contact
               </a>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {metrics.map((metric) => (
+                <div key={metric.value} className="metric-card">
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="hero-panel w-full max-w-[28rem] justify-self-center lg:justify-self-end lg:-translate-y-4">
-            <div className="hero-panel-glow" />
-            <div className="headshot-media">
+          <aside className="profile-card w-full max-w-[23.5rem] justify-self-center lg:justify-self-end">
+            <div className="profile-scanline" />
+            <div className="headshot-frame">
               <Image
                 src="/yuva-headshot.PNG"
-                alt="Portrait of Yuva Raj Bhatta"
+                alt="Portrait of Yuva Bhatta"
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 28rem"
+                sizes="(max-width: 1024px) 100vw, 23.5rem"
                 className="object-cover object-top"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-7xl px-6 pb-20 md:px-10">
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="metric-card">
-            <div className="text-4xl tracking-[-0.08em] text-white">2022</div>
-            <div className="text-sm text-white/60">Started at Paychex</div>
-          </div>
-          <div className="metric-card">
-            <div className="text-4xl tracking-[-0.08em] text-white">2</div>
-            <div className="text-sm text-white/60">
-              Completed degrees in computing disciplines
+            <div className="profile-card-footer">
+              <div>
+                <p>Yuva Bhatta</p>
+                <span>Software Developer</span>
+              </div>
+              <span className="availability-chip">Online</span>
             </div>
-          </div>
-          <div className="metric-card">
-            <div className="text-4xl tracking-[-0.08em] text-white">4</div>
-            <div className="text-sm text-white/60">
-              Languages spoken: Nepali, English, Hindi, Urdu
-            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" className="section-wrap">
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <SectionHeader
+            eyebrow="About"
+            title="A software engineer with data depth, infrastructure curiosity, and creative range."
+          />
+          <div className="glass-panel space-y-5 p-6 text-base leading-relaxed text-slate-300 md:p-7">
+            <p>
+              I am a Texas-based software developer originally from Nepal, with
+              a background shaped by software engineering, data science, and a
+              creative mindset. My work is grounded in building reliable systems
+              while staying curious about how technology can become more useful,
+              automated, and personal.
+            </p>
+            <p>
+              My Master of Science in Data Science adds analytical depth to my
+              engineering foundation. I like working where backend systems,
+              cloud infrastructure, self-hosted tools, AI automation, and
+              full-stack delivery meet.
+            </p>
           </div>
         </div>
       </section>
 
-      <section
-        id="about"
-        className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-24 md:px-10 lg:grid-cols-[0.8fr_1.2fr]"
-      >
-        <div className="space-y-4">
-          <p className="section-label">About</p>
-          <h2 className="text-4xl leading-tight tracking-[-0.05em] text-white md:text-5xl">
-            My path has been shaped by engineering discipline and creative
-            curiosity.
-          </h2>
-        </div>
-        <div className="space-y-6 text-lg leading-8 text-white/72">
-          <p>
-            I am originally from Nepal and now based in Fort Worth, Texas. I
-            have built my path around technology, problem solving, and
-            continuous growth. My work reflects a balance between structured
-            engineering practice and genuine curiosity about how systems behave,
-            scale, and evolve.
-          </p>
-          <p>
-            Outside of software, music remains a meaningful part of my identity.
-            I enjoy singing, playing instruments, and dancing, which brings a
-            more human and expressive side to an otherwise highly technical
-            career.
-          </p>
-        </div>
-      </section>
-
-      <section
-        id="strengths"
-        className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10"
-      >
-        <div className="grid gap-6 lg:grid-cols-3">
-          {focusAreas.map((item) => (
-            <article key={item.title} className="feature-card">
-              <p className="section-label">{item.eyebrow}</p>
-              <h3 className="mt-6 text-3xl leading-tight tracking-[-0.04em] text-white">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-base leading-7 text-white/68">
-                {item.copy}
-              </p>
+      <section id="projects" className="section-wrap">
+        <SectionHeader
+          eyebrow="Featured Projects"
+          title="Systems, experiments, and platforms that reflect how I build."
+          copy="These are high-level project areas rather than fake repository links. Public links can be added as projects are published."
+        />
+        <div className="project-grid mt-10">
+          {projectCards.map((project) => (
+            <article key={project.title} className="project-card">
+              <p className="section-kicker">{project.eyebrow}</p>
+              <h3>{project.title}</h3>
+              <p>{project.copy}</p>
+              <div className="chip-row">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="tech-chip">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section
-        id="experience"
-        className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10"
-      >
-        <div className="showcase-panel">
-          <div className="showcase-copy">
-            <p className="section-label">Experience</p>
-            <h2 className="mt-5 max-w-3xl text-4xl leading-tight tracking-[-0.05em] text-white md:text-6xl">
-              A technical career, without reducing the whole story to work
-              alone.
-            </h2>
-            <div className="mt-6 max-w-2xl space-y-4 text-lg leading-8 text-white/70">
-              {experiencePoints.map((item) => (
-                <p key={item}>{item}</p>
-              ))}
-              <p>
-                My career is an important part of the picture, but this site is
-                meant to show the person behind the role as well: someone shaped
-                by culture, movement, music, and a long-term interest in
-                technology.
-              </p>
-            </div>
-          </div>
+      <section id="technical-focus" className="section-wrap">
+        <SectionHeader
+          eyebrow="Technical Focus"
+          title="Focused on practical systems that need to run, scale, integrate, and improve."
+        />
+        <div className="focus-grid mt-10">
+          {focusCards.map((item, index) => (
+            <article key={item.title} className="focus-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
-          <div className="space-y-4">
-            <div className="feature-card min-h-0">
-              <p className="section-label">Current role</p>
-              <h3 className="mt-5 text-3xl leading-tight tracking-[-0.04em] text-white">
-                Software Developer
-              </h3>
-              <p className="mt-3 text-base leading-7 text-white/68">
-                Paychex
-              </p>
-              <p className="mt-2 text-sm uppercase tracking-[0.22em] text-[var(--color-sand)]">
-                2022 to Present
-              </p>
-            </div>
-            <div className="feature-card min-h-0">
-              <p className="section-label">Core stack</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-full border border-white/12 bg-white/6 px-4 py-2 text-sm text-white/72"
-                  >
-                    {skill}
-                  </span>
-                ))}
+      <section className="section-wrap">
+        <div className="glass-panel p-6 md:p-8">
+          <SectionHeader
+            eyebrow="Tech Stack"
+            title="Languages, frameworks, platforms, and tools I work with."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            {techStack.map((tech) => (
+              <span key={tech} className="stack-chip">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" className="section-wrap">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+          <div className="glass-panel p-6 md:p-8">
+            <p className="section-kicker">Experience</p>
+            <h2 className="section-title mt-4 max-w-xl">
+              Production software delivery with a backend-first foundation.
+            </h2>
+          </div>
+          <div className="timeline-panel">
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div>
+                <p className="section-kicker">2022 to Present</p>
+                <h3>Software Developer, Paychex</h3>
+                <div className="mt-5 space-y-4 text-slate-300">
+                  {experiencePoints.map((point) => (
+                    <p key={point}>{point}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10">
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="feature-card min-h-0">
-            <p className="section-label">Education</p>
-            <div className="mt-6 space-y-6">
-              {education.map((item) => (
-                <div key={item.degree} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
-                  <h3 className="text-2xl leading-tight tracking-[-0.04em] text-white">
-                    {item.degree}
-                  </h3>
-                  <p className="mt-2 text-base text-white/68">{item.school}</p>
-                  <p className="mt-1 text-sm uppercase tracking-[0.22em] text-[var(--color-sand)]">
-                    {item.location}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="feature-card min-h-0">
-            <p className="section-label">Personal side</p>
-            <h2 className="mt-6 max-w-2xl text-4xl leading-tight tracking-[-0.05em] text-white">
-              A personal website should feel like a person, not only a profile.
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-white/70">
-              This space brings together my professional experience, academic
-              background, roots in Nepal, life in Texas, and creative interests
-              into one place that can be shared across professional networks and
-              social platforms.
-            </p>
-            <p className="mt-4 text-lg leading-8 text-white/70">
-              My goal is to make a strong first impression that remains polished
-              while still feeling personal, grounded, and real.
-            </p>
-          </div>
+      <section className="section-wrap">
+        <SectionHeader
+          eyebrow="Education"
+          title="Computer science foundation with graduate-level data science depth."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {education.map((item) => (
+            <article key={item.degree} className="education-card">
+              <p className="section-kicker">{item.location}</p>
+              <h3>{item.degree}</h3>
+              <p>{item.school}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section
-        id="contact"
-        className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 pb-24 md:px-10"
-      >
-        <p className="section-label">Connect</p>
-        <div className="flex flex-col gap-8 border-t border-white/12 pt-10">
-          <div className="max-w-3xl">
-            <h2 className="text-4xl leading-tight tracking-[-0.05em] text-white md:text-6xl">
-              Open to professional connections, opportunities, and meaningful
-              conversations around technology.
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-white/68">
-              You can connect through the platforms below or reach out directly
-              by email.
+      <section id="github" className="section-wrap">
+        <SectionHeader
+          eyebrow="GitHub Activity"
+          title="A developer profile layer built around public activity and technical presence."
+          copy="External analytics are embedded as progressive enhancements. The layout remains intact if a provider is temporarily unavailable."
+        />
+        <div className="github-grid mt-10">
+          {githubCards.map((card) => (
+            <article key={card.title} className="github-card">
+              <div className="github-card-header">
+                <span className="status-dot" />
+                <p>{card.title}</p>
+              </div>
+              <Image
+                src={card.src}
+                alt={`${card.title} for Yuva Bhatta GitHub profile`}
+                width={540}
+                height={330}
+                loading="lazy"
+                unoptimized
+              />
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="contact" className="section-wrap pb-20">
+        <div className="contact-panel">
+          <div>
+            <p className="section-kicker">Contact</p>
+            <h2 className="contact-title">Connect for engineering, automation, infrastructure, or data-focused conversations.</h2>
+            <p>
+              I am open to professional connections, meaningful technical
+              conversations, and opportunities that align with backend systems,
+              cloud infrastructure, AI automation, and full-stack engineering.
             </p>
           </div>
 
@@ -409,49 +515,33 @@ export default function Home() {
                 href={item.href}
                 target="_blank"
                 rel="noreferrer"
-                className="metric-card transition hover:-translate-y-0.5 hover:border-white/24"
+                className="social-card"
               >
-                <div className="flex items-center gap-3">
-                  <span className="icon-badge">
-                    <SocialIcon label={item.label} />
-                  </span>
-                  <p className="section-label">{item.label}</p>
+                <span className="icon-badge">
+                  <SocialIcon label={item.label} />
+                </span>
+                <div>
+                  <p>{item.label}</p>
+                  <span>{item.value}</span>
                 </div>
-                <p className="mt-4 text-xl tracking-[-0.03em] text-white">
-                  {item.value}
-                </p>
-                <p className="mt-2 text-sm text-white/55">
-                  Open {item.label}
-                </p>
               </a>
             ))}
           </div>
 
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <a
-              href="mailto:yuvarajbhatta@outlook.com"
-              className="button-primary"
-            >
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a href="mailto:yuvarajbhatta@outlook.com" className="button-primary">
               yuvarajbhatta@outlook.com
             </a>
-            <a
-              href="mailto:yuvabhatta01@gmail.com"
-              className="button-primary"
-            >
+            <a href="mailto:yuvabhatta01@gmail.com" className="button-secondary">
               yuvabhatta01@gmail.com
             </a>
           </div>
         </div>
       </section>
 
-      <footer className="mx-auto w-full max-w-7xl px-6 pb-10 md:px-10">
-        <div className="footer-shell">
-          <p className="text-sm text-white/55">
-            © 2026 Yuva Raj Bhatta. All rights reserved.
-          </p>
-          <p className="text-sm text-white/45">
-            Built with intention, shaped by technology and creativity.
-          </p>
+      <footer className="mx-auto w-full max-w-6xl px-5 pb-10 text-sm text-slate-500 md:px-8">
+        <div className="border-t border-white/10 pt-6">
+          © 2026 Yuva Bhatta. Built as a modern developer portfolio with Next.js.
         </div>
       </footer>
     </main>
