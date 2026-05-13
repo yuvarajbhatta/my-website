@@ -156,21 +156,21 @@ const socialLinks = [
     href: "https://x.com/YuvaBhatta",
     value: "@YuvaBhatta",
   },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/yr.bhatta/",
-    value: "@yr.bhatta",
-  },
-  {
-    label: "TikTok",
-    href: "https://www.tiktok.com/@yuvaraj.bhatta1",
-    value: "@yuvaraj.bhatta1",
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/yuvaraj.bhatta1",
-    value: "yuvaraj.bhatta1",
-  },
+  // {
+  //   label: "Instagram",
+  //   href: "https://www.instagram.com/yr.bhatta/",
+  //   value: "@yr.bhatta",
+  // },
+  // {
+  //   label: "TikTok",
+  //   href: "https://www.tiktok.com/@yuvaraj.bhatta1",
+  //   value: "@yuvaraj.bhatta1",
+  // },
+  // {
+  //   label: "Facebook",
+  //   href: "https://www.facebook.com/yuvaraj.bhatta1",
+  //   value: "yuvaraj.bhatta1",
+  // },
 ];
 
 function SocialIcon({ label }: { label: string }) {
