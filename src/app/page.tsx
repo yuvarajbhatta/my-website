@@ -144,7 +144,7 @@ const socialLinks = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/yuva-raj-bhatta-900ab923a",
-    value: "yuva-raj-bhatta-",
+    value: "yuva-raj-bhatta-900ab923a",
   },
   {
     label: "GitHub",
