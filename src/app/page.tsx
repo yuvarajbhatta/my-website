@@ -143,7 +143,7 @@ const githubCards = [
 const socialLinks = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/yuva-raj-bhatta-/",
+    href: "https://www.linkedin.com/in/yuva-raj-bhatta-900ab923a",
     value: "yuva-raj-bhatta-",
   },
   {
