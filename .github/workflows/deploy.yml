@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - name: Deploy my website
-        run: /home/yuva/deploy-my-website.sh
+        run: /srv/scripts/deploy/my-website-deploy.sh
