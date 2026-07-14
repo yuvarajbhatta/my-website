@@ -1,4 +1,5 @@
 import { SectionHeader } from "@/components/ui/section-header";
+import { SkillsVisual } from "@/components/three/skills-visual";
 import { focusCards, skillGroups } from "@/lib/data";
 
 export function Skills() {
@@ -8,7 +9,12 @@ export function Skills() {
         eyebrow="Technical Focus"
         title="Focused on practical systems that need to run, scale, integrate, and improve."
       />
-      <div className="focus-grid mt-10">
+
+      <div className="skills-visual-frame reveal-up mt-8">
+        <SkillsVisual />
+      </div>
+
+      <div className="focus-grid mt-8">
         {focusCards.map((item, index) => (
           <article key={item.title} className="focus-card reveal-up">
             <span>{String(index + 1).padStart(2, "0")}</span>

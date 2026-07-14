@@ -17,7 +17,6 @@ export function isLowPowerDevice(): boolean {
 
   const cores = navigator.hardwareConcurrency ?? 8;
   const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
-  const isSmallViewport = typeof window !== "undefined" && window.innerWidth < 768;
 
-  return cores <= 4 && (memory <= 4 || isSmallViewport);
+  return cores <= 2 && memory <= 2;
 }

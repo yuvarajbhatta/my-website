@@ -1,4 +1,5 @@
 import { SectionHeader } from "@/components/ui/section-header";
+import { AboutJourneyVisual } from "@/components/three/about-journey-visual";
 import { journey } from "@/lib/data";
 
 export function About() {
@@ -26,7 +27,11 @@ export function About() {
         </div>
       </div>
 
-      <ol className="journey-line mt-10">
+      <div className="journey-visual-frame reveal-up mt-10">
+        <AboutJourneyVisual />
+      </div>
+
+      <ol className="journey-line mt-6">
         {journey.map((step) => (
           <li key={step.title} className="journey-step reveal-up">
             <span className="journey-marker" aria-hidden="true" />

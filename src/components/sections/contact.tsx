@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SocialIcon } from "@/components/ui/social-icon";
+import { ConnectVisual } from "@/components/three/connect-visual";
 import { emails, socialLinks } from "@/lib/data";
 
 export function Contact() {
@@ -19,6 +20,10 @@ export function Contact() {
 
   return (
     <section id="contact" className="section-wrap pb-20">
+      <div className="connect-visual-frame reveal-up">
+        <ConnectVisual />
+      </div>
+
       <div className="contact-panel">
         <div>
           <p className="section-kicker">Contact</p>

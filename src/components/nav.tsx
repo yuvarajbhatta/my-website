@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { navItems } from "@/lib/data";
 
 export function Nav() {
-  const [activeHref, setActiveHref] = useState<string>("#home");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const activeHrefRef = useRef<string>("#home");
+  const linkRefs = useRef<Map<string, HTMLAnchorElement[]>>(new Map());
 
   useEffect(() => {
     const sections = navItems
@@ -16,6 +14,24 @@ export function Nav() {
 
     if (sections.length === 0) return;
 
+    const applyActive = (href: string) => {
+      if (activeHrefRef.current === href) return;
+      activeHrefRef.current = href;
+
+      linkRefs.current.forEach((els, key) => {
+        const isActive = key === href;
+        els.forEach((el) => {
+          el.dataset.active = String(isActive);
+          if (isActive) {
+            el.setAttribute("aria-current", "true");
+            el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          } else {
+            el.removeAttribute("aria-current");
+          }
+        });
+      });
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -23,7 +39,7 @@ export function Nav() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
         if (visible[0]) {
-          setActiveHref(`#${visible[0].target.id}`);
+          applyActive(`#${visible[0].target.id}`);
         }
       },
       { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
@@ -33,22 +49,16 @@ export function Nav() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!menuOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-        toggleRef.current?.focus();
-      }
+  function registerLink(href: string) {
+    return (el: HTMLAnchorElement | null) => {
+      const existing = linkRefs.current.get(href) ?? [];
+      const withoutEl = existing.filter((item) => item !== el);
+      linkRefs.current.set(href, el ? [...withoutEl, el] : withoutEl);
     };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [menuOpen]);
+  }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050814]/75 backdrop-blur-xl">
+    <header className="site-header border-b border-white/10 bg-[#050814]/85 backdrop-blur-xl">
       <nav
         className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 md:px-8"
         aria-label="Primary"
@@ -61,53 +71,33 @@ export function Nav() {
           </div>
         </a>
 
-        <div className="hidden items-center gap-6 text-slate-300 md:flex">
+        <div className="hidden items-center gap-2 text-slate-300 md:flex">
           {navItems.map((item) => (
             <a
               key={item.href}
+              ref={registerLink(item.href)}
               href={item.href}
               className="nav-link"
-              aria-current={activeHref === item.href ? "true" : undefined}
-              data-active={activeHref === item.href}
+              data-active={item.href === "#home"}
             >
               {item.label}
             </a>
           ))}
         </div>
-
-        <button
-          ref={toggleRef}
-          type="button"
-          className="nav-toggle md:hidden"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav-panel"
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="nav-toggle-bar" data-open={menuOpen} />
-        </button>
       </nav>
 
-      <div
-        id="mobile-nav-panel"
-        ref={panelRef}
-        className="nav-panel md:hidden"
-        data-open={menuOpen}
-        hidden={!menuOpen}
-      >
-        <div className="grid gap-1 px-5 pb-5">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="nav-panel-link"
-              aria-current={activeHref === item.href ? "true" : undefined}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
+      <div className="nav-strip flex md:hidden" aria-label="Section navigation">
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            ref={registerLink(item.href)}
+            href={item.href}
+            className="nav-strip-link"
+            data-active={item.href === "#home"}
+          >
+            {item.label}
+          </a>
+        ))}
       </div>
     </header>
   );
