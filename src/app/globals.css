@@ -798,21 +798,25 @@ button:focus-visible {
 
 .reveal-up {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(22px) scale(0.975);
+  filter: blur(6px);
   transition:
-    opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 720ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-up-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal-up {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
   }
 
@@ -876,14 +880,17 @@ button:focus-visible {
   color: white;
 }
 
-/* Hero: 3D canvas layer */
+/* Persistent world canvas: fixed behind the entire page */
 
-.hero-canvas-layer {
-  position: absolute;
+.world-canvas-layer {
+  position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  mask-image: radial-gradient(circle at 68% 42%, black, transparent 72%);
+}
+
+.world-canvas-layer canvas {
+  display: block;
 }
 
 .hero-content {
@@ -1205,46 +1212,3 @@ button:focus-visible {
   background: rgba(34, 211, 238, 0.06);
 }
 
-/* Section 3D scene frames */
-
-.journey-visual-frame,
-.skills-visual-frame,
-.project-frame-shell,
-.waveform-visual-frame,
-.connect-visual-frame {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1.1rem;
-  border: 1px solid var(--color-line);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
-    var(--color-panel);
-  height: 18rem;
-}
-
-.skills-visual-frame {
-  height: 20rem;
-}
-
-.project-frame-shell {
-  height: 16rem;
-}
-
-.journey-visual,
-.skills-visual,
-.project-frame-visual,
-.waveform-visual,
-.connect-visual {
-  position: absolute;
-  inset: 0;
-}
-
-@media (max-width: 767px) {
-  .journey-visual-frame,
-  .skills-visual-frame,
-  .project-frame-shell,
-  .waveform-visual-frame,
-  .connect-visual-frame {
-    height: 13rem;
-  }
-}

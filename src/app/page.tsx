@@ -9,10 +9,13 @@ import { Creative } from "@/components/sections/creative";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { WorldVisual } from "@/components/three/world/world-visual";
+import { DomParallax } from "@/components/dom-parallax";
 
 export default function Home() {
   return (
     <main className="site-shell text-slate-100">
+      <WorldVisual />
       <div className="ambient-grid" />
       <div className="ambient-glow ambient-glow-one" />
       <div className="ambient-glow ambient-glow-two" />
@@ -29,6 +32,7 @@ export default function Home() {
       <Footer />
 
       <ScrollReveal />
+      <DomParallax />
     </main>
   );
 }

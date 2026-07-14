@@ -1,11 +1,8 @@
 import { SectionHeader } from "@/components/ui/section-header";
 import { TiltCard } from "@/components/ui/tilt-card";
-import { ProjectFrameVisual } from "@/components/three/project-frame-visual";
 import { projects } from "@/lib/data";
 
 export function Projects() {
-  const featured = projects.find((project) => project.featured) ?? projects[0];
-
   return (
     <section id="projects" className="section-wrap">
       <SectionHeader
@@ -14,11 +11,7 @@ export function Projects() {
         copy="These are high-level project areas rather than fake repository links. Public links can be added as projects are published."
       />
 
-      <div className="project-frame-shell reveal-up mt-8">
-        <ProjectFrameVisual title={featured.title} />
-      </div>
-
-      <div className="project-grid mt-8">
+      <div className="project-grid mt-10">
         {projects.map((project) => (
           <article key={project.title} className="contents">
             <TiltCard

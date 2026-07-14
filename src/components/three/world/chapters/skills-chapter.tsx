@@ -2,10 +2,9 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
 import * as THREE from "three";
-import { SceneCanvas } from "./scene-canvas";
 import { skillGroups } from "@/lib/data";
+import { DepthLabel } from "../depth-label";
 
 const COLORS = ["#22d3ee", "#8b5cf6", "#3b82f6", "#67e8f9"];
 
@@ -37,21 +36,21 @@ function OrbitNode({
   return (
     <group ref={ref}>
       <mesh>
-        <sphereGeometry args={[0.13, 20, 20]} />
+        <sphereGeometry args={[0.15, 20, 20]} />
         <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.6} />
       </mesh>
       {showLabel ? (
-        <Html center wrapperClass="pointer-events-none select-none">
+        <DepthLabel position={[0, 0, 0]}>
           <span className="whitespace-nowrap rounded-full border border-cyan-300/20 bg-[#050814]/75 px-2 py-0.5 font-mono text-[10px] tracking-wide text-cyan-100/75">
             {label}
           </span>
-        </Html>
+        </DepthLabel>
       ) : null}
     </group>
   );
 }
 
-function Constellation({ reduceMotion, showLabels }: { reduceMotion: boolean; showLabels: boolean }) {
+export function SkillsChapter({ reduceMotion, showLabels }: { reduceMotion: boolean; showLabels: boolean }) {
   const core = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
@@ -63,12 +62,12 @@ function Constellation({ reduceMotion, showLabels }: { reduceMotion: boolean; sh
   return (
     <group>
       <mesh ref={core}>
-        <icosahedronGeometry args={[0.35, 1]} />
+        <icosahedronGeometry args={[0.4, 1]} />
         <meshStandardMaterial color="#0ea5e9" wireframe transparent opacity={0.75} />
       </mesh>
 
       {skillGroups.map((group, index) => {
-        const radius = 1.7 + index * 0.35;
+        const radius = 1.9 + index * 0.4;
         const speed = 0.12 + index * 0.03;
         const color = COLORS[index % COLORS.length];
         return (
@@ -90,21 +89,5 @@ function Constellation({ reduceMotion, showLabels }: { reduceMotion: boolean; sh
         );
       })}
     </group>
-  );
-}
-
-export default function SkillsScene({
-  active,
-  isCompact,
-  reduceMotion,
-}: {
-  active: boolean;
-  isCompact: boolean;
-  reduceMotion: boolean;
-}) {
-  return (
-    <SceneCanvas active={active} isCompact={isCompact} camera={{ position: [0, 1.4, 6], fov: 42 }}>
-      <Constellation reduceMotion={reduceMotion} showLabels={!isCompact} />
-    </SceneCanvas>
   );
 }

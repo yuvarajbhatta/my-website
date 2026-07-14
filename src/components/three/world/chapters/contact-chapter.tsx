@@ -3,19 +3,15 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { SceneCanvas } from "./scene-canvas";
 import { generateSpherePositions } from "@/lib/particles";
 
-function ConvergingParticles({ reduceMotion }: { reduceMotion: boolean }) {
+export function ContactChapter({ reduceMotion, particleCount }: { reduceMotion: boolean; particleCount: number }) {
   const pointsRef = useRef<THREE.Points>(null);
   const core = useRef<THREE.Mesh>(null);
-  const count = 90;
-
-  const start = useMemo(() => generateSpherePositions(count), [count]);
-  const positions = useMemo(() => start.slice(), [start]);
+  const positions = useMemo(() => generateSpherePositions(particleCount), [particleCount]);
 
   useFrame((_, delta) => {
-    if (pointsRef.current) {
+    if (pointsRef.current && !reduceMotion) {
       pointsRef.current.rotation.y += delta * 0.05;
     }
     if (core.current && !reduceMotion) {
@@ -33,7 +29,7 @@ function ConvergingParticles({ reduceMotion }: { reduceMotion: boolean }) {
         <pointsMaterial color="#67e8f9" size={0.035} sizeAttenuation transparent opacity={0.6} />
       </points>
       <mesh ref={core}>
-        <icosahedronGeometry args={[0.4, 2]} />
+        <icosahedronGeometry args={[0.45, 2]} />
         <meshPhysicalMaterial
           color="#8b5cf6"
           transparent
@@ -44,21 +40,5 @@ function ConvergingParticles({ reduceMotion }: { reduceMotion: boolean }) {
         />
       </mesh>
     </group>
-  );
-}
-
-export default function ConnectScene({
-  active,
-  isCompact,
-  reduceMotion,
-}: {
-  active: boolean;
-  isCompact: boolean;
-  reduceMotion: boolean;
-}) {
-  return (
-    <SceneCanvas active={active} isCompact={isCompact} camera={{ position: [0, 0, 5.5], fov: 42 }}>
-      <ConvergingParticles reduceMotion={reduceMotion} />
-    </SceneCanvas>
   );
 }

@@ -1,14 +1,9 @@
 import Image from "next/image";
-import { HeroVisual } from "@/components/three/hero-visual";
 import { metrics, documentsUrl } from "@/lib/data";
 
 export function Hero() {
   return (
     <section id="home" className="hero-section relative">
-      <div className="hero-canvas-layer">
-        <HeroVisual />
-      </div>
-
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-14 md:px-8 md:py-20 lg:grid-cols-[minmax(0,1fr)_23.5rem] lg:gap-14">
         <div className="hero-content space-y-7">
           <div className="status-pill">
