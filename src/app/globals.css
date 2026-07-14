@@ -823,6 +823,10 @@ button:focus-visible {
   html {
     scroll-behavior: auto;
   }
+
+  .nav-strip-hint-animated svg {
+    animation: none;
+  }
 }
 
 /* Nav: fixed header + active state */
@@ -848,12 +852,16 @@ button:focus-visible {
 
 /* Nav: mobile horizontal strip (replaces hidden hamburger menu) */
 
+.nav-strip-wrap {
+  position: relative;
+  border-top: 1px solid var(--color-line);
+}
+
 .nav-strip {
   gap: 0.5rem;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  border-top: 1px solid var(--color-line);
   padding: 0.65rem 1.1rem;
 }
 
@@ -878,6 +886,44 @@ button:focus-visible {
   border-color: rgba(103, 232, 249, 0.55);
   background: rgba(34, 211, 238, 0.14);
   color: white;
+}
+
+/* Nav: swipe-to-see-more hint, shown only while the strip actually overflows */
+
+.nav-strip-hint {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding-right: 0.5rem;
+  padding-left: 1.75rem;
+  background: linear-gradient(to right, transparent, rgba(5, 8, 20, 0.96) 55%);
+  pointer-events: none;
+}
+
+.nav-strip-hint svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--color-cyan);
+}
+
+.nav-strip-hint-animated svg {
+  animation: nav-hint-nudge 1.5s ease-in-out infinite;
+}
+
+@keyframes nav-hint-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(5px);
+    opacity: 1;
+  }
 }
 
 /* Persistent world canvas: fixed behind the entire page */

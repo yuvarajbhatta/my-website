@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navItems } from "@/lib/data";
+import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function Nav() {
   const activeHrefRef = useRef<string>("#home");
   const linkRefs = useRef<Map<string, HTMLAnchorElement[]>>(new Map());
+  const stripRef = useRef<HTMLDivElement>(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+  const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const sections = navItems
@@ -49,6 +53,32 @@ export function Nav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const node = stripRef.current;
+    if (!node) return;
+
+    let dismissed = false;
+
+    const checkOverflow = () => {
+      if (dismissed) return;
+      setShowSwipeHint(node.scrollWidth > node.clientWidth + 4);
+    };
+
+    const resizeObserver = new ResizeObserver(checkOverflow);
+    resizeObserver.observe(node);
+
+    const handleScroll = () => {
+      dismissed = true;
+      setShowSwipeHint(false);
+    };
+    node.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      resizeObserver.disconnect();
+      node.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   function registerLink(href: string) {
     return (el: HTMLAnchorElement | null) => {
       const existing = linkRefs.current.get(href) ?? [];
@@ -86,18 +116,37 @@ export function Nav() {
         </div>
       </nav>
 
-      <div className="nav-strip flex md:hidden" aria-label="Section navigation">
-        {navItems.map((item) => (
-          <a
-            key={item.href}
-            ref={registerLink(item.href)}
-            href={item.href}
-            className="nav-strip-link"
-            data-active={item.href === "#home"}
+      <div className="nav-strip-wrap md:hidden">
+        <div ref={stripRef} className="nav-strip flex" aria-label="Section navigation">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              ref={registerLink(item.href)}
+              href={item.href}
+              className="nav-strip-link"
+              data-active={item.href === "#home"}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {showSwipeHint ? (
+          <span
+            className={`nav-strip-hint ${reduceMotion ? "" : "nav-strip-hint-animated"}`}
+            aria-hidden="true"
           >
-            {item.label}
-          </a>
-        ))}
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M9 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        ) : null}
       </div>
     </header>
   );
