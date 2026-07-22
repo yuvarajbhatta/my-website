@@ -211,8 +211,8 @@ export const socialLinks = [
 ] as const;
 
 export const emails = [
-  "yuvarajbhatta@outlook.com",
-  "yuvabhatta01@gmail.com",
+  "contact@yrbhatta.com",
+  // "yuvabhatta01@gmail.com",
 ] as const;
 
 export const documentsUrl = "https://cloud.yrbhatta.com/s/4QqPcSm4Kbc4xf3";
